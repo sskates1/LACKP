@@ -1,19 +1,24 @@
 body {
     /* Use a "Matrix"-style color scheme. */
-    background-color: black;
-    color: #00ff00;
+    background-color: #FFFFFF;
+    color: #000000;
 
     font-family: monospace;
     font-size: 1.5em;
 }
 
-ul {
-    /* Wrap the list in a green box. */
-    width: 300px;
-    border: 1px solid #00ff00;
+.each-player li {
+    display: inline-block;
+    list-style: none;
+    padding-left: 10px;
+    font-size:12pt;
 }
 
-li {
-    /* Add a bit more spacing between list items. */
-    padding: 5px;
+.navigation-bar1 li {
+    display: inline-block;
+    list-style: none;
+}
+
+.super-bar li{
+    list-style:none;
 }

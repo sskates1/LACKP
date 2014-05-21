@@ -1,3 +1,4 @@
+require_relative 'rubyMethods'
 require 'sinatra'
 require 'csv'
 require 'uri'
@@ -6,44 +7,35 @@ require 'pry'
 set :public_folder, File.dirname(__FILE__) + '/public'
 set :views, File.dirname(__FILE__) + '/views'
 
-team_hash = {}
 
-  teams = []
+teams_hash, teams_list, position_list = create_teams_hash('lackp_starting_rosters.csv')
 
-  CSV.foreach('lackp_starting_rosters.csv', headers: true) do |row|
-    #hash = Hash[row]
-
-    if !(teams.include? (row["team"]))
-      teams = teams.push(row["team"])
-      team_hash[row["team"]] =[]
-    end
-
-    first_name = row["first_name"]
-    last_name = row["last_name"]
-    position = row["position"]
-    position_of_player = row["team"]
-    player = {first_name: first_name, last_name: last_name, position: position}
-
-
-    for team_name, team_list in team_hash
-      if position_of_player == team_name
-        team_list.push(player)
-      #end if statment
-      end
-    #end for loop
-    end
-  #end foreach loop
-  end
+before do
+  @teams_list = teams_list
+  @position_list = position_list
+end
 
 get '/' do
-  @team_hash = team_hash.values
+  @teams_hash = teams_hash.values
+  @teams_list
+  @position_list
   erb :index
 # end get do
 end
 
+get '/position/:position' do
+  @position = params[:position]
+  @position_array = get_position_array(teams_hash, @position)
+  @teams_list
+  @position_list
+  erb :position_page
+end
+
 get '/teams/:team_name' do
   @name = params[:team_name]
-  @team_hash = team_hash[@name]
+  @team_hash = teams_hash[@name]
+  @teams_list
+  @position_list
   erb :team_page
 end
 

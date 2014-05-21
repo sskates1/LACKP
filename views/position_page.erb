@@ -1,22 +1,22 @@
 
 <head>
-  <title><%= @name %></title>
+  <title><%= @position%></title>
 </head>
+
 <h1>
-  <%= @name %>
+  <%= @position %>
 </h1>
 
 <p>
-
   <ul class = "List-of-everyone">
     <li>
       <ul class = "each-player">
         <li>First Name &nbsp</li>
         <li>Last Name &nbsp</li>
-        <li>Possition &nbsp</li>
+        <li>Team &nbsp</li>
       </ul>
     </li>
-    <% @team_hash.each do | player| %>
+    <% @position_array.each do | player| %>
       <li>
         <ul class = "each-player">
           <% player.each do |attribute, value| %>
@@ -26,5 +26,4 @@
       </li>
     <% end %>
   </ul>
-
 </p>
